@@ -3,8 +3,7 @@ import { CgWorkAlt } from "react-icons/cg";
 import { FaReact } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import spacetagramImg from "@/public/spacetagram.png";
-import rmtdevImg from "@/public/rmtdev.png";
-import wordanalyticsImg from "@/public/wordanalytics.png";
+import guessnumbergameImg from "@/public/guessnumbergame.png";
 
 export const links = [
     {
@@ -69,11 +68,11 @@ export const projectsData = [
         imageUrl: spacetagramImg,
     },
     {
-        title: "Spacetagram",
+        title: "Guess My Number",
         description:
-            "A web app built with React that displays random images from space obtained from the NASA API.",
+            "A web app built with JavaScript where you guess intuitively the hidden number within a specified range. With each guess, you receive insightful hints that guides you closer to elusive target.",
         tags: ["React", "Next.js", "Tailwind"],
-        imageUrl: spacetagramImg,
+        imageUrl: guessnumbergameImg,
     },
     {
         title: "Spacetagram",
