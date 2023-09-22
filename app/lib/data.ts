@@ -1,0 +1,104 @@
+import React from "react";
+import { CgWorkAlt } from "react-icons/cg";
+import { FaReact } from "react-icons/fa";
+import { LuGraduationCap } from "react-icons/lu";
+import spacetagramImg from "@/public/spacetagram.png";
+import rmtdevImg from "@/public/rmtdev.png";
+import wordanalyticsImg from "@/public/wordanalytics.png";
+
+export const links = [
+    {
+        name: "Home",
+        hash: "#home",
+    },
+    {
+        name: "About",
+        hash: "#about",
+    },
+    {
+        name: "Projects",
+        hash: "#projects",
+    },
+    {
+        name: "Skills",
+        hash: "#skills",
+    },
+    {
+        name: "Experience",
+        hash: "#experience",
+    },
+    {
+        name: "Contact",
+        hash: "#contact",
+    },
+] as const;
+
+export const experiencesData = [
+    {
+        title: "SRE trainee",
+        location: "Nigeria (Remote)",
+        description:
+            "I trained as a Site Reliability Engineer with She Code Africa for 3 months. I gained knowledge of DevOps culture and virtualization and containerizatin of applications.",
+        icon: React.createElement(LuGraduationCap),
+        date: "2021",
+    },
+    {
+        title: "Full-stack Developer Intern",
+        location: "Helsinki, Finland",
+        description:
+            "I worked as a full-stack developer trainee for 8 months. ",
+        icon: React.createElement(CgWorkAlt),
+        date: "2021 - 2022 ",
+    },
+    {
+        title: "Full-Stack Developer",
+        location: "Nijmegen, The Netherlands",
+        description:
+            "I'm now a full-stack developer working at Firmhouse BV. My stack includes Ruby, Ruby on Rails, React, Next.js, TypeScript and Tailwind. I'm open to full-time opportunities.",
+        icon: React.createElement(FaReact),
+        date: "2022 - present",
+    },
+] as const;
+
+export const projectsData = [
+    {
+        title: "Spacetagram",
+        description:
+            "A web app built with React that displays random images from space obtained from the NASA API.",
+        tags: ["React", "Next.js", "Tailwind"],
+        imageUrl: spacetagramImg,
+    },
+    {
+        title: "Spacetagram",
+        description:
+            "A web app built with React that displays random images from space obtained from the NASA API.",
+        tags: ["React", "Next.js", "Tailwind"],
+        imageUrl: spacetagramImg,
+    },
+    {
+        title: "Spacetagram",
+        description:
+            "A web app built with React that displays random images from space obtained from the NASA API.",
+        tags: ["React", "Next.js", "Tailwind"],
+        imageUrl: spacetagramImg,
+    },
+] as const;
+
+export const skillsData = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "Git",
+    "Tailwind",
+    "MongoDB",
+    "Redux",
+    "GraphQL",
+    "Express",
+    "PostgreSQL",
+    "Python",
+    "Framer Motion",
+] as const;
