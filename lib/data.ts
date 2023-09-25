@@ -71,7 +71,7 @@ export const projectsData = [
         title: "Guess My Number",
         description:
             "A web app built with JavaScript where you guess intuitively the hidden number within a specified range. With each guess, you receive insightful hints that guides you closer to elusive target.",
-        tags: ["React", "Next.js", "Tailwind"],
+        tags: ["HTML", "CSS", "JavaScript"],
         imageUrl: guessnumbergameImg,
     },
     {
