@@ -10,7 +10,10 @@ import { FaGithubSquare } from 'react-icons/fa';
 
 export default function Intro() {
   return (
-    <section className="mb-28 max-w-[50rem] text-center sm:mb-0">
+    <section
+      id="home"
+      className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]"
+    >
       <div className="flex items-center justify-center">
         <div className="relative">
           <motion.div
@@ -51,7 +54,8 @@ export default function Intro() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hi, I'm Beryl. </span>A{' '}
+        <span className="font-bold">Hi, I'm </span>
+        <span className="font-bold italic">Beryl. </span>A{' '}
         <span className="font-bold">full-stack developer </span> passionate
         about crafting dynamic, user-friendly applications. Proficient in{' '}
         <span className="font-bold italic">Ruby on Rails, React, </span> with an
