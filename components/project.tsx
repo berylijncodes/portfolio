@@ -29,7 +29,7 @@ export default function Project({
       }}
       className="group mb-4 sm:mb-8 last:mb-0"
     >
-      <section className="flex group-even:flex-row-reverse bg-slate-1S00 max-w-[50rem] border border-black/5 rounded-lg overflow-hidden hover:bg-slate-200 transition">
+      <section className="flex group-even:flex-row-reverse bg-slate-50 max-w-[50rem] border border-black/5 rounded-lg overflow-hidden hover:bg-slate-100 transition">
         <div className="flex flex-col py-4 px-5 sm:pl-6 sm:pr-2 sm:pt-10 group-odd:ml-4 group-even:ml-4 sm:max-w-[50%]">
           <h3 className="text-2xl font-semibold">{title}</h3>
           <p className="mt-2 leading-relaxed text-slate-700">{description}</p>
