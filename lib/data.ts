@@ -36,6 +36,7 @@ export const links = [
 export const experiencesData = [
     {
         title: "SRE trainee",
+        company: "She Code Africa",
         location: "Nigeria (Remote)",
         description:
             "I trained as a Site Reliability Engineer with She Code Africa for 3 months. I gained knowledge of DevOps culture and virtualization and containerizatin of applications.",
@@ -44,6 +45,7 @@ export const experiencesData = [
     },
     {
         title: "Full-stack Developer Intern",
+        company: "Integrify",
         location: "Helsinki, Finland",
         description:
             "I worked as a full-stack developer trainee for 8 months. ",
@@ -52,6 +54,7 @@ export const experiencesData = [
     },
     {
         title: "Full-Stack Developer",
+        company: "Firmhouse BV",
         location: "Nijmegen, The Netherlands",
         description:
             "I'm now a full-stack developer working at Firmhouse BV. My stack includes Ruby, Ruby on Rails, React, Next.js, TypeScript and Tailwind. I'm open to full-time opportunities.",
