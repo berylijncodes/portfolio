@@ -12,7 +12,7 @@ export default function Experience() {
   const divRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: divRef,
-    offset: ['start end', 'start center'],
+    offset: ['start end', 'start end'],
   });
   return (
     <section
