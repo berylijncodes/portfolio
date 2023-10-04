@@ -39,7 +39,7 @@ export const experiencesData = [
         company: "She Code Africa",
         location: "Nigeria (Remote)",
         description:
-            "I trained as a Site Reliability Engineer with She Code Africa for 3 months. I gained knowledge of DevOps culture and virtualization and containerizatin of applications.",
+            "During my time as a Site Reliability Engineer Trainee at She Code Africa, I acquired valuable knowledge and skills in DevOps practices. I gained proficiency in using basic Linux commands for implementing Linux administration tasks, virtualization, dockerization, and containerization of applications using tools such as Vagrant, Docker, and Cloud Build. I also gained hands-on experience in implementing Infrastructure as Code and Pipeline as Code concepts through the utilization of CI / CD and infrastructure tools like Jenkins CI, Terraform, and Circle CI.These experiences allowed me to develop a good foundation in the automation and management of infrastructure and deployment pipelines",
         icon: React.createElement(LuGraduationCap),
         date: "2021",
     },
@@ -48,7 +48,7 @@ export const experiencesData = [
         company: "Integrify",
         location: "Helsinki, Finland",
         description:
-            "I worked as a full-stack developer trainee for 8 months. ",
+            "As a Full Stack Developer Trainee at Integrify, Finland (Remote) from August 2021 to April 2022, I gained valuable experience in building websites and applications. Working closely with the design team, I successfully translated designs into pixel-perfect websites using HTML, CSS (SCSS), JavaScript, and TypeScript. Collaborating with the development team, I contributed to the creation of highly responsive and accessible applications to deliver an exceptional user experience. On the frontend, I worked with modern technologies such as React, Redux, and Redux Toolkit. Additionally, I had the opportunity to work on server-side applications using Node.js and MongoDB databases. Overall, my experience at Integrify allowed me to develop a comprehensive skill set in full-stack development, encompassing both frontend and backend technologies.",
         icon: React.createElement(CgWorkAlt),
         date: "2021 - 2022 ",
     },

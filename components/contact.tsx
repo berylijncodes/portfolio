@@ -1,14 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import SectionHeading from '@/components/section-heading';
 import { useSectionInView } from '@/lib/hooks';
-import { FaPaperPlane } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { sendEmail } from '@/actions/send-email';
+import ContactBtn from './contact-btn';
+import toast from 'react-hot-toast';
 
 export default function Contact() {
   const { ref } = useSectionInView('Contact');
+  const [formData, setFormData] = useState({
+    senderEmail: '',
+    message: '',
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <motion.section
       id="contact"
@@ -21,41 +33,59 @@ export default function Contact() {
     >
       <SectionHeading>Get in touch</SectionHeading>
 
-      <p className="text-slate-700">
+      <p className="text-slate-700 dark:text-white/80">
         I'm currently looking for new opportunities, my inbox is always open.
-        Whether you have a question or just want to say hi, I'll try my best to
-        get back to you! Contact me via{' '}
-        <a className="underline" href="mailto:berylijn@gmail.com">
+        Whether you have a question or just want to say hi 👋, I'll try my best
+        to get back to you! Contact me via{' '}
+        <a
+          className="text-blue-900 dark:text-blue-500 font-medium"
+          href="mailto:berylijn@gmail.com"
+        >
           berylijn@gmail.com
         </a>
-        {''} or through this form.
+        {''} or through this{' '}
+        <span className="text-blue-900 dark:text-blue-500 font-medium">
+          form
+        </span>
+        .
       </p>
 
       <form
         action={async (formData) => {
-          await sendEmail(formData);
+          const { data, error } = await sendEmail(formData);
+
+          if (error) {
+            toast.error(error);
+            return;
+          }
+          toast.success('Email sent successfully!');
+          setFormData({
+            senderEmail: '',
+            message: '',
+          });
         }}
-        className="mt-10 flex flex-col"
+        className="mt-10 flex flex-col dark:text-black"
       >
         <input
-          className="h-14 px-4 rounded-lg borderBlack"
+          className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
           name="senderEmail"
           type="email"
           placeholder="Your email"
           required
           maxLength={5000}
+          value={formData.senderEmail}
+          onChange={handleInputChange}
         />
         <textarea
-          className="h-52 my-3 rounded-lg borderBlack p-4"
+          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
           name="message"
           placeholder="Your message"
           required
           maxLength={500}
+          value={formData.message}
+          onChange={handleInputChange}
         />
-        <button className="group flex justify-center gap-2 items-center h-[3rem] w-[8rem] bg-slate-900 text-white rounded-full outline-none transition-all">
-          Submit{' '}
-          <FaPaperPlane className="text-xs opacity-70 transition-all group-hover:translate-x-1 group-hover:-translate-y-1 hover:bg-slate-950 focus:scale-110 hover:scale-110 active:scale-105" />
-        </button>
+        <ContactBtn />
       </form>
     </motion.section>
   );

@@ -55,7 +55,7 @@ export default function Intro() {
         </div>
       </div>
       <motion.h1
-        className="mb-10 mt-4 px-4 text-2xl text-slate-950 font-medium !leading-[1.5] sm:text-4xl"
+        className="mb-10 mt-4 px-4 text-2xl text-slate-950 font-medium !leading-[1.5] sm:text-4xl dark:text-white/80"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
@@ -80,20 +80,20 @@ export default function Intro() {
       >
         <Link
           href="#contact"
-          className="group bg-slate-950 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-slate-950 active:scale-105 transition"
+          className="group bg-slate-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-slate-900 active:scale-105 transition"
           onClick={() => {
             setActiveSection('Contact');
             setTimeOfLastClick(Date.now());
           }}
         >
           Get in touch{' '}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition" />
+          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition dark:bg-slate-950 dark:border-black/40 dark:bg-opacity-75 dark:text-white/60 " />
         </Link>
 
         <a
           href="/berylcv.pdf"
           download={true}
-          className="bg-white text-slate-950 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition border border-black/10"
+          className="bg-white text-slate-900 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition border border-black/10 dark:bg-white/10 dark:text-white/60 cursor-pointer"
         >
           Download CV{' '}
           <HiDownload className="opacity-70 group-hover:translate-x-1 transition" />
@@ -102,7 +102,7 @@ export default function Intro() {
         <a
           href="https://www.linkedin.com/in/beryl-ilenwabor"
           target="_blank"
-          className="bg-white text-gray-900 p-4 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-slate-950 active:scale-[1.15] transition border border-black/10"
+          className="bg-white text-gray-900 p-4 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-slate-950 active:scale-[1.15] transition border border-black/10  dark:bg-white/10 dark:text-white/60 cursor-pointer"
         >
           <BsLinkedin />
         </a>
@@ -110,7 +110,7 @@ export default function Intro() {
         <a
           href="https://github.com/berylijncodes"
           target="_blank"
-          className="bg-white text-gray-900 p-4 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-slate-950 active:scale-[1.15] transition border border-black/10"
+          className="bg-white text-gray-900 p-4 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-slate-950 active:scale-[1.15] transition border border-black/10  dark:bg-white/10 dark:text-white/60 cursor-pointer"
         >
           <FaGithubSquare />
         </a>

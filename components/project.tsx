@@ -29,14 +29,16 @@ export default function Project({
       }}
       className="group mb-4 sm:mb-8 last:mb-0"
     >
-      <section className="flex group-even:flex-row-reverse bg-slate-50 max-w-[50rem] border border-black/5 rounded-lg overflow-hidden hover:bg-slate-100 transition">
+      <section className="flex group-even:flex-row-reverse bg-slate-50 max-w-[50rem] border border-black/5 rounded-lg overflow-hidden hover:bg-slate-100 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
         <div className="flex flex-col py-4 px-5 sm:pl-6 sm:pr-2 sm:pt-10 group-odd:ml-4 group-even:ml-4 sm:max-w-[50%]">
           <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="mt-2 leading-relaxed text-slate-700">{description}</p>
+          <p className="mt-2 leading-relaxed text-slate-700 dark:text-white/70">
+            {description}
+          </p>
           <ul className="flex flex-wrap mt-4 pb-6 sm:mt-auto gap-2">
             {tags.map((tag, index) => (
               <li
-                className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full"
+                className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
                 key={index}
               >
                 {tag}
@@ -49,7 +51,7 @@ export default function Project({
             src={imageUrl}
             alt="My projects"
             quality={95}
-            className="h-[16.25rem] w-[28.25rem] rounded-t-lg shadow-2xl mt-4 object-top group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 group-hover:scale-[1.04] group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2 transition"
+            className="hidden sm:block h-[16.25rem] w-[28.25rem] rounded-t-lg shadow-2xl mt-4 object-top group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 group-hover:scale-[1.04] group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2 transition"
           />
         </div>
       </section>

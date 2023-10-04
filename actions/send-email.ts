@@ -1,33 +1,44 @@
 "use server"
 
 import React from 'react'
-import { validateString } from '@/lib/utils'
+import { validateString, getErrorMessage } from '@/lib/utils'
 import { Resend } from 'resend'
 import ContactFormEmail from '@/email/contact-form-email'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function sendEmail(formData: FormData) {
-  const senderEmail = formData.get('senderEmail')
-  const message = formData.get('message')
+export const sendEmail = async (formData: FormData) => {
+  const senderEmail = formData.get("senderEmail");
+  const message = formData.get("message");
 
-  if (!validateString(senderEmail, 50)) {
-    throw new Error('Invalid email')
+  // simple server-side validation
+  if (!validateString(senderEmail, 500)) {
+    return {
+      error: "Invalid sender email",
+    };
   }
   if (!validateString(message, 5000)) {
-    throw new Error('Invalid message')
+    return {
+      error: "Invalid message",
+    };
   }
 
+  let data;
   try {
-    await resend.emails.send({
-      from: 'Contact <onboarding@resend.dev>',
+    data = await resend.emails.send({
+      from: "Contact Form <onboarding@resend.dev>",
       to: "berylijn@gmail.com",
-      reply_to: senderEmail as string,
-      subject: 'Message from your portfolio website',
-      react: React.createElement(ContactFormEmail, { senderEmail: senderEmail as string, message: message as string })
-    })
+      subject: "Message from potfolio website",
+      reply_to: senderEmail,
+      text: message, // add the text property
+    });
+  } catch (error: unknown) {
+    return {
+      error: getErrorMessage(error),
+    };
   }
-  catch (error) {
-    throw new Error('Failed to send email')
-  }
-}
+
+  return {
+    data,
+  };
+};
