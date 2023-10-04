@@ -45,7 +45,7 @@ export default function Experience() {
                     @{item.company}
                   </span>
                 </h3>
-                <span className="capitalize font-medium text-black/40">
+                <span className="capitalize font-medium text-black/40 dark:text-white/40">
                   {item.date} | {item.location}
                 </span>
                 <p className="font-medium w-full mb-6 dark:text-white/75">
