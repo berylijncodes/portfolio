@@ -57,7 +57,7 @@ export const experiencesData = [
         company: "Firmhouse BV",
         location: "Nijmegen, The Netherlands",
         description:
-            "I'm now a full-stack developer working at Firmhouse BV. My stack includes Ruby, Ruby on Rails, React, Next.js, TypeScript and Tailwind. I'm open to full-time opportunities.",
+            "As a Junior Full-stack Software Developer working at Firmhouse BV. I work collaboratively with a team of developers to introduce new features and optimize existing functionalities within our applications, participated in debugging and troubleshooting activities, ensuring the stability and reliability of our software solutions. I have gained valuable insights into the world of Recurring Commerce. I have honed my skills in Ruby, Ruby on Rails, and React, while working on projects that have a significant impact on the success of our clients.",
         icon: React.createElement(FaReact),
         date: "2022 - present",
     },
