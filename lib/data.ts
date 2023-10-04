@@ -2,7 +2,7 @@ import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
 import { FaReact } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
-import spacetagramImg from "@/public/spacetagram.png";
+import portfolioImg from "@/public/portfolio.png";
 import spacefinityImg from "@/public/spacefinity.png"
 import guessnumbergameImg from "@/public/guessnumbergame.png";
 
@@ -65,11 +65,11 @@ export const experiencesData = [
 
 export const projectsData = [
     {
-        title: "Spacetagram",
+        title: "Portfolio Website",
         description:
-            "A web app built with React that displays random images from space obtained from the NASA API.",
-        tags: ["React", "Next.js", "Tailwind"],
-        imageUrl: spacetagramImg,
+            "My portfolio website built with React & Next.js, TypeScript, Tailwind CSS, Framer Motion, React Email and Resend.",
+        tags: ["React", "Next.js", "Tailwind", "TypeScript", "Framer Motion"],
+        imageUrl: portfolioImg,
     },
     {
         title: "Guess My Number",
