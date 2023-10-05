@@ -35,8 +35,8 @@ export default function Contact() {
 
       <p className="text-slate-700 dark:text-white/80">
         I'm currently looking for new opportunities, my inbox is always open.
-        Whether you have a question or just want to say hi 👋, I'll try my best
-        to get back to you! Contact me via{' '}
+        Whether you have a question or just want to say hi 👋, I will to get
+        back to you as soon as possible! Contact me via{' '}
         <a
           className="text-blue-900 dark:text-blue-500 font-medium"
           href="mailto:berylijn@gmail.com"
