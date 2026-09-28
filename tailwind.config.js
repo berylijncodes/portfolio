@@ -7,6 +7,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        canvas: '#0B0E11',
+        card: '#11161C',
+        line: '#21262D',
+        fg: '#C9D1D9',
+        muted: '#8B949E',
+        heading: '#F0F3F6',
+        accent: '#3FB950',
+      },
+      fontFamily: {
+        mono: ['var(--font-jetbrains-mono)'],
+      },
+      borderRadius: {
+        DEFAULT: '3px',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -15,5 +30,4 @@ module.exports = {
     },
   },
   plugins: [],
-  darkMode: 'class',
 };

@@ -1,13 +1,14 @@
 import Header from '@/components/header';
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
 import ActiveSectionContext from '@/context/active-section-context';
 import { Toaster } from 'react-hot-toast';
 import Footer from '@/components/footer';
-import ThemeSwitch from '@/components/theme-switch';
-import ThemeContextProvider from '@/context/theme-context';
 
-const inter = Inter({ subsets: ['latin'] });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+});
 
 export const metadata = {
   title: 'Beryl | Portfolio',
@@ -23,32 +24,26 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body
-        className={`${inter.className} box-border bg-slate-50 relative text-slate-950 pt-28 sm:pt-36 overflow-x-hidden dark:bg-slate-900 dark:text-slate-50 dark:text-opacity-90`}
+        className={`${jetbrainsMono.className} box-border bg-canvas relative text-fg pt-28 sm:pt-36 overflow-x-hidden`}
       >
-        {/* <div className="bg-[#fbe2e3] absolute -z-10 top-[-6rem] right-[-11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
-        <div className="bg-[#dbd7fb] absolute -z-10 top-[-1rem] left-[-35rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#676394]"></div> */}
+        <ActiveSectionContext>
+          <Header />
+          {children}
+          <Footer />
 
-        <div className="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
-        <div className="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"></div>
-
-        <ThemeContextProvider>
-          <ActiveSectionContext>
-            <Header />
-            {children}
-            <Footer />
-
-            <Toaster
-              position="top-right"
-              toastOptions={{
-                style: {
-                  background: '#1f2937',
-                  color: '#fff',
-                },
-              }}
-            />
-            <ThemeSwitch />
-          </ActiveSectionContext>
-        </ThemeContextProvider>
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: '#11161C',
+                color: '#C9D1D9',
+                border: '1px solid #21262D',
+                borderRadius: '3px',
+                fontFamily: 'var(--font-jetbrains-mono)',
+              },
+            }}
+          />
+        </ActiveSectionContext>
       </body>
     </html>
   );
