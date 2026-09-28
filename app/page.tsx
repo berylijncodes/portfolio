@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Intro from '@/components/intro';
 import About from '@/components/about';
 import SectionDivider from '@/components/section-divider';
