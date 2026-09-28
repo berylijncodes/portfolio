@@ -24,8 +24,8 @@ export default function Project({
     <motion.div
       ref={ref}
       style={{
-        scale: scrollYProgress,
-        opacity: scrollYProgress,
+        scale: scaleProgress,
+        opacity: opacityProgress,
       }}
       className="group mb-4 sm:mb-8 last:mb-0"
     >

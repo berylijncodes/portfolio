@@ -52,7 +52,7 @@ export default function Contact() {
 
       <form
         action={async (formData) => {
-          const { data, error } = await sendEmail(formData);
+          const { error } = await sendEmail(formData);
 
           if (error) {
             toast.error(error);
@@ -72,7 +72,7 @@ export default function Contact() {
           type="email"
           placeholder="Your email"
           required
-          maxLength={5000}
+          maxLength={500}
           value={formData.senderEmail}
           onChange={handleInputChange}
         />
@@ -81,7 +81,7 @@ export default function Contact() {
           name="message"
           placeholder="Your message"
           required
-          maxLength={500}
+          maxLength={5000}
           value={formData.message}
           onChange={handleInputChange}
         />
