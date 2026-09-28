@@ -3,9 +3,21 @@
 @tailwind utilities;
 
 html {
-  --line-color: #e5e7eb;
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-canvas text-fg;
+}
+
+::selection {
+  @apply bg-accent/30 text-heading;
+}
+
+:focus-visible {
+  @apply outline outline-2 outline-offset-2 outline-accent;
 }
 
 .borderBlack {
-  @apply border-black/10;
+  @apply border-line;
 }
