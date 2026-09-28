@@ -14,7 +14,6 @@ function ExperienceItem({
   title,
   company,
   location,
-  description,
   date,
 }: ExperienceItemProps) {
   const divRef = useRef<HTMLDivElement>(null);
@@ -42,12 +41,9 @@ function ExperienceItem({
                 @{company}
               </span>
             </h3>
-            <span className="capitalize font-medium text-black/40 dark:text-white/40">
+            <span className="capitalize font-medium text-black/40 dark:text-white/40 mb-6 block">
               {date} | {location}
             </span>
-            <p className="font-medium w-full mb-6 dark:text-white/75">
-              {description}
-            </p>
           </motion.div>
         </li>
       </ul>

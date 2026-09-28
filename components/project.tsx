@@ -36,7 +36,7 @@ export default function Project({
             {description}
           </p>
           <ul className="flex flex-wrap mt-4 pb-6 sm:mt-auto gap-2">
-            {tags.map((tag, index) => (
+            {tags?.map((tag, index) => (
               <li
                 className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
                 key={index}
@@ -46,14 +46,16 @@ export default function Project({
             ))}
           </ul>
         </div>
-        <div>
-          <Image
-            src={imageUrl}
-            alt="My projects"
-            quality={95}
-            className="hidden sm:block h-[16.25rem] w-[28.25rem] rounded-t-lg shadow-2xl mt-4 object-top group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 group-hover:scale-[1.04] group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2 transition"
-          />
-        </div>
+        {imageUrl && (
+          <div>
+            <Image
+              src={imageUrl}
+              alt="My projects"
+              quality={95}
+              className="hidden sm:block h-[16.25rem] w-[28.25rem] rounded-t-lg shadow-2xl mt-4 object-top group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 group-hover:scale-[1.04] group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2 transition"
+            />
+          </div>
+        )}
       </section>
     </motion.div>
   );
