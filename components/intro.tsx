@@ -1,118 +1,97 @@
 'use client';
 
-import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { BsArrowRight, BsLinkedin } from 'react-icons/bs';
 import { HiDownload } from 'react-icons/hi';
-import { FaGithubSquare } from 'react-icons/fa';
 import { useSectionInView } from '@/lib/hooks';
 import { useActiveSectionContext } from '@/context/active-section-context';
+import SectionLabel from './section-label';
 
 export default function Intro() {
   const { ref } = useSectionInView('Home', 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+
+  const goToContact = () => {
+    setActiveSection('Contact');
+    setTimeOfLastClick(Date.now());
+  };
+
   return (
     <section
       ref={ref}
       id="home"
-      className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]"
+      className="mb-28 max-w-3xl text-left sm:mb-0 scroll-mt-[100rem]"
     >
-      <div className="flex items-center justify-center">
-        <div className="relative">
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: 'tween',
-              duration: 0.2,
-            }}
-          >
-            <Image
-              src="/berylportrait.jpg"
-              alt="Beryl potrait"
-              width={192}
-              height={192}
-              priority={true}
-              className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
-            />
-          </motion.div>
-
-          <motion.span
-            className="absolute bottom-0 right-0 text-4xl"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              type: 'spring',
-              stiffness: 125,
-              delay: 0.1,
-              duration: 0.7,
-            }}
-          >
-            👋
-          </motion.span>
-        </div>
-      </div>
-      <motion.h1
-        className="mb-10 mt-4 px-4 text-2xl text-slate-950 font-medium !leading-[1.5] sm:text-4xl dark:text-white/80"
-        initial={{ opacity: 0, y: 100 }}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <span className="font-bold">Hi, I'm </span>
-        <span className="font-bold italic">Beryl. </span>A{' '}
-        <span className="font-bold">full-stack developer </span> passionate
-        about crafting dynamic, user-friendly applications. Proficient in{' '}
-        <span className="font-bold italic">Ruby on Rails, React, </span> with an
-        eye for <span className="font-bold italic"> design, </span>I create
-        seamless digital experiences that leave a{' '}
-        <span className="italic">positive impact!</span>
+        <SectionLabel>$ whoami</SectionLabel>
+      </motion.div>
+
+      <motion.h1
+        className="text-3xl font-bold !leading-[1.3] text-heading sm:text-5xl"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+      >
+        Beryl Ilenwabor —<br />
+        frontend engineer, <span className="text-accent">building</span>
+        <br />
+        <span className="text-accent">AI agents</span>.
       </motion.h1>
 
-      <motion.div
-        className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
-        initial={{ opacity: 0, y: 100 }}
+      <motion.p
+        className="mt-6 max-w-xl font-mono text-sm leading-relaxed text-muted"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.1,
-          staggerChildren: 0.5,
-        }}
+        transition={{ delay: 0.2 }}
+      >
+        <span className="text-accent">{'// '}</span>React + TypeScript at TravPro
+        Mobile. Background in immunology and microbiology. Currently building
+        agent-powered tools on top of a frontend foundation.
+      </motion.p>
+
+      <motion.div
+        className="mt-8 flex flex-wrap items-center gap-3 text-sm font-medium"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
       >
         <Link
           href="#contact"
-          className="group bg-slate-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-slate-900 active:scale-105 transition"
-          onClick={() => {
-            setActiveSection('Contact');
-            setTimeOfLastClick(Date.now());
-          }}
+          onClick={goToContact}
+          className="rounded border border-accent bg-accent px-4 py-2 text-canvas transition hover:bg-accent/90"
         >
-          Get in touch{' '}
-          <BsArrowRight className="opacity-70 group-hover:translate-x-1 transition dark:bg-slate-950 dark:border-black/40 dark:bg-opacity-75 dark:text-white/60 " />
+          get_in_touch()
         </Link>
 
         <a
           href="/berylcv.pdf"
-          download={true}
-          className="bg-white text-slate-900 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition border border-black/10 dark:bg-white/10 dark:text-white/60 cursor-pointer"
+          download
+          className="flex items-center gap-2 rounded border border-line px-4 py-2 text-fg transition hover:border-fg/40"
         >
-          Download CV{' '}
-          <HiDownload className="opacity-70 group-hover:translate-x-1 transition" />
-        </a>
-
-        <a
-          href="https://www.linkedin.com/in/beryl-ilenwabor"
-          target="_blank"
-          className="bg-white text-gray-900 p-4 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-slate-950 active:scale-[1.15] transition border border-black/10  dark:bg-white/10 dark:text-white/60 cursor-pointer"
-        >
-          <BsLinkedin />
+          download_cv.pdf
+          <HiDownload className="text-xs opacity-70" aria-hidden="true" />
         </a>
 
         <a
           href="https://github.com/berylijncodes"
           target="_blank"
-          className="bg-white text-gray-900 p-4 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-slate-950 active:scale-[1.15] transition border border-black/10  dark:bg-white/10 dark:text-white/60 cursor-pointer"
+          rel="noopener noreferrer"
+          className="rounded border border-line px-4 py-2 text-fg transition hover:border-fg/40"
         >
-          <FaGithubSquare />
+          github <span aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/beryl-ilenwabor"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded border border-line px-4 py-2 text-fg transition hover:border-fg/40"
+        >
+          linkedin <span aria-hidden="true">↗</span>
         </a>
       </motion.div>
     </section>
