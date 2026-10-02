@@ -6,15 +6,24 @@ export default function ContactBtn() {
   const { pending } = useFormStatus();
   return (
     <button
-      className="group flex justify-center gap-2 items-center h-[3rem] w-[8rem] bg-slate-900 text-white rounded-full outline-none transition-all hover:bg-slate-950 disabled:bg-opacity-65 focus:scale-110 hover:scale-110 active:scale-105 dark:bg-white dark:bg-opacity-10 disabled:scale-100"
+      className="group mt-1 flex h-11 items-center justify-center gap-2 rounded border border-accent bg-accent px-6 text-sm font-medium text-canvas transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60"
       disabled={pending}
     >
       {pending ? (
-        <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+        <>
+          <span
+            aria-hidden="true"
+            className="h-4 w-4 animate-spin rounded-full border-2 border-canvas border-b-transparent"
+          />
+          <span className="sr-only">Sending…</span>
+        </>
       ) : (
         <>
-          Submit{' '}
-          <FaPaperPlane className="text-xs opacity-70 transition-all group-hover:translate-x-1 group-hover:-translate-y-1" />
+          send_message()
+          <FaPaperPlane
+            aria-hidden="true"
+            className="text-xs opacity-70 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+          />
         </>
       )}
     </button>

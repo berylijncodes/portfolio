@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import SectionHeading from '@/components/section-heading';
+import SectionLabel from '@/components/section-label';
 import { useSectionInView } from '@/lib/hooks';
 import { motion } from 'framer-motion';
 import { sendEmail } from '@/actions/send-email';
@@ -11,6 +12,7 @@ import toast from 'react-hot-toast';
 export default function Contact() {
   const { ref } = useSectionInView('Contact');
   const [formData, setFormData] = useState({
+    name: '',
     senderEmail: '',
     message: '',
   });
@@ -25,68 +27,116 @@ export default function Contact() {
     <motion.section
       id="contact"
       ref={ref}
-      className="scroll-mt-28 mb-20 sm:mb-28 w-[min(100%,38rem)] text-center"
+      className="mb-20 w-full max-w-4xl scroll-mt-28 sm:mb-28"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      transition={{ delay: 1 }}
       viewport={{ once: true }}
     >
-      <SectionHeading>Get in touch</SectionHeading>
+      <div className="grid gap-10 sm:grid-cols-[1fr_1.1fr] sm:items-start">
+        <div>
+          <SectionLabel>{'// 05_contact.sh'}</SectionLabel>
+          <SectionHeading className="text-left">
+            $ contact --connect
+          </SectionHeading>
+          <p className="max-w-sm text-sm leading-relaxed text-muted">
+            My inbox is always open — whether you have a question, a project
+            in mind, or just want to say hi.
+          </p>
+          <a
+            href="mailto:berylijn@gmail.com"
+            className="mt-6 inline-block rounded border border-line px-4 py-2 text-sm text-fg transition hover:border-fg/40"
+          >
+            berylijn@gmail.com
+          </a>
+        </div>
 
-      <p className="text-slate-700 dark:text-white/80">
-        I'm currently looking for new opportunities, my inbox is always open.
-        Whether you have a question or just want to say hi 👋, I will to get
-        back to you as soon as possible! Contact me via{' '}
-        <a
-          className="text-blue-900 dark:text-blue-500 font-medium"
-          href="mailto:berylijn@gmail.com"
-        >
-          berylijn@gmail.com
-        </a>
-        {''} or through this{' '}
-        <span className="text-blue-900 dark:text-blue-500 font-medium">
-          form
-        </span>
-        .
-      </p>
+        <div className="overflow-hidden rounded border border-line bg-card">
+          <div
+            aria-hidden="true"
+            className="flex items-center gap-1.5 border-b border-line px-3 py-2"
+          >
+            <span className="h-2.5 w-2.5 rounded-full bg-line" />
+            <span className="h-2.5 w-2.5 rounded-full bg-line" />
+            <span className="h-2.5 w-2.5 rounded-full bg-line" />
+            <span className="ml-1.5 text-xs text-muted">new_message.sh</span>
+          </div>
 
-      <form
-        action={async (formData) => {
-          const { error } = await sendEmail(formData);
+          <form
+            action={async (formData) => {
+              const { error } = await sendEmail(formData);
 
-          if (error) {
-            toast.error(error);
-            return;
-          }
-          toast.success('Email sent successfully!');
-          setFormData({
-            senderEmail: '',
-            message: '',
-          });
-        }}
-        className="mt-10 flex flex-col dark:text-black"
-      >
-        <input
-          className="h-14 px-4 rounded-lg borderBlack dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          name="senderEmail"
-          type="email"
-          placeholder="Your email"
-          required
-          maxLength={500}
-          value={formData.senderEmail}
-          onChange={handleInputChange}
-        />
-        <textarea
-          className="h-52 my-3 rounded-lg borderBlack p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
-          name="message"
-          placeholder="Your message"
-          required
-          maxLength={5000}
-          value={formData.message}
-          onChange={handleInputChange}
-        />
-        <ContactBtn />
-      </form>
+              if (error) {
+                toast.error(error);
+                return;
+              }
+              toast.success('Email sent successfully!');
+              setFormData({ name: '', senderEmail: '', message: '' });
+            }}
+            className="flex flex-col gap-4 p-5"
+          >
+            <div>
+              <label
+                htmlFor="name"
+                className="mb-1.5 block text-xs text-accent"
+              >
+                {'$ name'}
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="your name"
+                required
+                maxLength={100}
+                value={formData.name}
+                onChange={handleInputChange}
+                className="w-full rounded border border-line bg-canvas px-3 py-2 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="senderEmail"
+                className="mb-1.5 block text-xs text-accent"
+              >
+                {'$ email'}
+              </label>
+              <input
+                id="senderEmail"
+                name="senderEmail"
+                type="email"
+                placeholder="you@example.com"
+                required
+                maxLength={500}
+                value={formData.senderEmail}
+                onChange={handleInputChange}
+                className="w-full rounded border border-line bg-canvas px-3 py-2 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="message"
+                className="mb-1.5 block text-xs text-accent"
+              >
+                {'$ message'}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="what's on your mind?"
+                required
+                maxLength={5000}
+                value={formData.message}
+                onChange={handleInputChange}
+                className="h-32 w-full rounded border border-line bg-canvas px-3 py-2 text-sm text-fg placeholder:text-muted focus:border-accent focus:outline-none"
+              />
+            </div>
+
+            <ContactBtn />
+          </form>
+        </div>
+      </div>
     </motion.section>
   );
 }
