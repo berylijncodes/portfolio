@@ -1,68 +1,69 @@
-"use client";
+'use client';
 
-import React, { useRef } from "react";
-import SectionHeading from "./section-heading";
-import { useSectionInView } from "@/lib/hooks";
-import { experiencesData } from "@/lib/data";
-import { motion, useScroll } from "framer-motion";
-import ExperienceIcon from "./experience-icon";
-
-type ExperienceItemProps = (typeof experiencesData)[number];
-
-// Each item needs its own ref so its line and icon track its own scroll position
-function ExperienceItem({
-  title,
-  company,
-  location,
-  date,
-}: ExperienceItemProps) {
-  const divRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: divRef,
-    offset: ["start end", "start center"],
-  });
-  return (
-    <div ref={divRef} className="w-full sm:w-[75%] mx-auto relative">
-      <motion.div
-        style={{ scaleY: scrollYProgress }}
-        className="absolute left-9 top-0 origin-top w-[4px] h-full bg-blue-900 dark:bg-blue-500"
-      />
-      <ul className="w-full h-full flex flex-col items-start justify-between ml-4">
-        <li className="first:mt-0 last:mb-0 mx-auto w-[60%]">
-          <ExperienceIcon reference={divRef} />
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.175, type: "spring", stiffness: 100 }}
-          >
-            <h3 className="font-semibold capitalize text-2xl w-full">
-              {title}{" "}
-              <span className="text-blue-900 dark:text-blue-500">
-                @{company}
-              </span>
-            </h3>
-            <span className="capitalize font-medium text-black/40 dark:text-white/40 mb-6 block">
-              {date} | {location}
-            </span>
-          </motion.div>
-        </li>
-      </ul>
-    </div>
-  );
-}
+import React from 'react';
+import SectionHeading from './section-heading';
+import SectionLabel from './section-label';
+import { useSectionInView } from '@/lib/hooks';
+import { experiencesData } from '@/lib/data';
+import { motion } from 'framer-motion';
+import { toSnakeCase } from '@/lib/utils';
+import clsx from 'clsx';
 
 export default function Experience() {
-  const { ref: sectionRef } = useSectionInView("Experience");
+  const { ref } = useSectionInView('Experience');
+  // Data stays oldest-first in lib/data.ts; the log-style display reads
+  // newest-first, so the order is flipped only here.
+  const entries = [...experiencesData].reverse();
+
   return (
     <section
+      ref={ref}
       id="experience"
-      ref={sectionRef}
-      className="scroll-mt-28 mb-28 sm:mb-40"
+      className="mb-28 w-full max-w-4xl scroll-mt-28 sm:mb-40"
     >
-      <SectionHeading>My experience</SectionHeading>
-      {experiencesData.map((item, index) => (
-        <ExperienceItem key={index} {...item} />
-      ))}
+      <SectionLabel>{'// 04_experience.log'}</SectionLabel>
+      <SectionHeading className="text-left">My experience</SectionHeading>
+
+      <ul className="space-y-6">
+        {entries.map((item, index) => {
+          const current = item.date.toLowerCase().includes('present');
+          return (
+            <motion.li
+              key={item.company}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.05 * index }}
+              className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line pb-4 last:border-none"
+            >
+              <div className="flex items-start gap-3">
+                <span
+                  aria-hidden="true"
+                  className={clsx(
+                    'mt-2 h-2 w-2 shrink-0 rounded-full',
+                    current ? 'bg-accent' : 'bg-line'
+                  )}
+                />
+                <div>
+                  <h3 className="font-medium text-heading">
+                    {toSnakeCase(item.title)}{' '}
+                    <span className="text-muted">@ {item.company}</span>
+                  </h3>
+                  <p className="text-sm text-muted">{item.location}</p>
+                </div>
+              </div>
+              <span
+                className={clsx(
+                  'text-sm',
+                  current ? 'text-accent' : 'text-muted'
+                )}
+              >
+                {item.date}
+              </span>
+            </motion.li>
+          );
+        })}
+      </ul>
     </section>
   );
 }
