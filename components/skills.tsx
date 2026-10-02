@@ -2,14 +2,17 @@
 
 import React from 'react';
 import SectionHeading from './section-heading';
+import SectionLabel from './section-label';
 import { skillsData } from '@/lib/data';
 import { useSectionInView } from '@/lib/hooks';
+import { slugify } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import clsx from 'clsx';
 
 const fadeInAnimationVariants = {
   initial: {
     opacity: 0,
-    y: 100,
+    y: 20,
   },
   animate: (index: number) => ({
     opacity: 1,
@@ -26,25 +29,34 @@ export default function Skills() {
     <section
       ref={ref}
       id="skills"
-      className="mb-28 max-w-[50rem] scroll-mt-28 text-center sm:mb-40"
+      className="mb-28 w-full max-w-4xl scroll-mt-28 sm:mb-40"
     >
-      <SectionHeading>My skills</SectionHeading>
-      <ul className="flex flex-wrap justify-center gap-2 text-lg text-slate-800">
-        {skillsData.map((skill, index) => (
-          <motion.li
-            key={index}
-            className="bg-white border border-black/[0.1] rounded-xl px-5 py-3 dark:bg-white/10 dark:text-white/80"
-            variants={fadeInAnimationVariants}
-            initial="initial"
-            whileInView="animate"
-            viewport={{
-              once: true,
-            }}
-            custom={index}
-          >
-            {skill}
-          </motion.li>
-        ))}
+      <SectionLabel>{'// 03_skills.json'}</SectionLabel>
+      <SectionHeading className="text-left">
+        What I build with.
+      </SectionHeading>
+      <ul className="flex flex-wrap gap-2 text-sm">
+        {skillsData.map((skill, index) => {
+          const highlighted = slugify(skill) === 'ai-agents';
+          return (
+            <motion.li
+              key={skill}
+              className={clsx(
+                'rounded border px-3 py-1.5',
+                highlighted
+                  ? 'border-accent bg-accent text-canvas'
+                  : 'border-line text-muted'
+              )}
+              variants={fadeInAnimationVariants}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              custom={index}
+            >
+              {slugify(skill)}
+            </motion.li>
+          );
+        })}
       </ul>
     </section>
   );
