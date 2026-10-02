@@ -1,62 +1,69 @@
 'use client';
 
-import React, { useRef } from 'react';
-import Image from 'next/image';
-import { projectsData } from '@/lib/data';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+import clsx from 'clsx';
+import { motion } from 'framer-motion';
+import type { Project as ProjectType, ProjectStatus } from '@/lib/types';
+import { slugify } from '@/lib/utils';
 
-type projectProps = (typeof projectsData)[number];
+const statusStyles: Record<ProjectStatus, string> = {
+  building: 'border-accent text-accent',
+  shipped: 'border-fg/40 text-fg',
+  redesigning: 'border-line text-muted',
+};
 
 export default function Project({
   title,
   description,
+  status,
   tags,
-  imageUrl,
-}: projectProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['0 1', '1.33 1'],
-  });
-  const scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
+  flagship,
+}: ProjectType) {
   return (
     <motion.div
-      ref={ref}
-      style={{
-        scale: scaleProgress,
-        opacity: opacityProgress,
-      }}
-      className="group mb-4 sm:mb-8 last:mb-0"
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className={clsx(
+        'rounded border bg-card p-5',
+        status === 'redesigning' ? 'border-dashed border-line' : 'border-line'
+      )}
     >
-      <section className="flex group-even:flex-row-reverse bg-slate-50 max-w-[50rem] border border-black/5 rounded-lg overflow-hidden hover:bg-slate-100 transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
-        <div className="flex flex-col py-4 px-5 sm:pl-6 sm:pr-2 sm:pt-10 group-odd:ml-4 group-even:ml-4 sm:max-w-[50%]">
-          <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="mt-2 leading-relaxed text-slate-700 dark:text-white/70">
-            {description}
-          </p>
-          <ul className="flex flex-wrap mt-4 pb-6 sm:mt-auto gap-2">
-            {tags?.map((tag, index) => (
-              <li
-                className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70"
-                key={index}
-              >
-                {tag}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {imageUrl && (
-          <div>
-            <Image
-              src={imageUrl}
-              alt="My projects"
-              quality={95}
-              className="hidden sm:block h-[16.25rem] w-[28.25rem] rounded-t-lg shadow-2xl mt-4 object-top group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 group-hover:scale-[1.04] group-even:group-hover:translate-x-3 group-even:group-hover:translate-y-3 group-even:group-hover:rotate-2 transition"
-            />
-          </div>
+      <div className="mb-3 flex items-center justify-between">
+        <span
+          className={clsx(
+            'rounded border px-2 py-0.5 text-xs',
+            statusStyles[status]
+          )}
+        >
+          status: {status}
+        </span>
+        {flagship && <span className="text-xs text-muted">flagship</span>}
+      </div>
+
+      <h3 className="mb-2 font-semibold text-heading">{slugify(title)}</h3>
+
+      <p
+        className={clsx(
+          'text-sm leading-relaxed',
+          status === 'redesigning' ? 'text-muted' : 'text-fg/80'
         )}
-      </section>
+      >
+        {description}
+      </p>
+
+      {tags && tags.length > 0 && (
+        <ul className="mt-4 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li
+              key={tag}
+              className="rounded border border-line px-2 py-0.5 text-xs text-muted"
+            >
+              {slugify(tag)}
+            </li>
+          ))}
+        </ul>
+      )}
     </motion.div>
   );
 }
