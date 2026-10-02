@@ -19,6 +19,16 @@ export const slugify = (text: string): string => {
     .replace(/^-|-$/g, "");
 };
 
+// turns display text into a snake_case label, e.g. "Frontend Developer" ->
+// "frontend_developer" — used for the log-style experience entries
+export const toSnakeCase = (text: string): string => {
+  return text
+    .toLowerCase()
+    .replace(/[\s-]+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
+}
+
 // helper function for error handling
 export const getErrorMessage = (error: unknown): string => {
   let message: string;
