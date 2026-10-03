@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { links } from "@/lib/data";
@@ -19,6 +19,28 @@ export default function Header() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Measures the header's real rendered height (which changes with the
+  // mobile menu open/closed, font size, zoom, etc.) and exposes it as a
+  // CSS variable, so the page's top padding never has to guess a fixed
+  // pixel value again.
+  useEffect(() => {
+    const headerEl = headerRef.current;
+    if (!headerEl) return;
+
+    const updateHeight = () => {
+      document.documentElement.style.setProperty(
+        "--header-height",
+        `${headerEl.offsetHeight}px`,
+      );
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(headerEl);
+    return () => observer.disconnect();
+  }, []);
 
   const navLinks = links.filter((link) => link.name !== "Home");
   const contactLink = links.find((link) => link.name === "Contact")!;
@@ -40,6 +62,7 @@ export default function Header() {
 
   return (
     <motion.header
+      ref={headerRef}
       className="fixed top-0 inset-x-0 z-[999] border-b border-line bg-canvas/90 backdrop-blur-[0.5rem]"
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -53,7 +76,7 @@ export default function Header() {
           beryl<span className="text-accent">.dev</span>
         </Link>
 
-        <nav aria-label="Section" className="hidden sm:block">
+        <nav aria-label="Section" className="hidden lg:block">
           <ul className="flex flex-wrap items-center gap-2 text-sm">
             {navLinks.map((link) => (
               <li key={link.hash}>
@@ -89,7 +112,7 @@ export default function Header() {
             aria-expanded={mobileNavOpen}
             aria-controls="mobile-nav"
             aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
-            className="flex h-9 w-9 items-center justify-center rounded border border-line text-fg sm:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded border border-line text-fg lg:hidden"
           >
             {mobileNavOpen ? (
               <BsX className="text-xl" aria-hidden="true" />
@@ -104,7 +127,7 @@ export default function Header() {
         <nav
           id="mobile-nav"
           aria-label="Section"
-          className="border-t border-line px-4 py-3 sm:hidden"
+          className="border-t border-line px-4 py-3 lg:hidden"
         >
           <ul className="flex flex-col gap-2 text-sm">
             {navLinks.map((link) => (

@@ -4,6 +4,10 @@
 
 html {
   color-scheme: dark;
+  /* Fallback for the initial paint, before Header measures its real
+     height and overwrites this. Keeps the body's top padding matched
+     to the header exactly, instead of a guessed pixel value. */
+  --header-height: 4.5rem;
 }
 
 body {
