@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body
-        className={`${jetbrainsMono.className} box-border bg-canvas relative text-fg pt-32 sm:pt-24 overflow-x-hidden`}
+        className={`${jetbrainsMono.className} box-border bg-canvas relative text-fg pt-24 overflow-x-hidden`}
       >
         <ActiveSectionContext>
           <Header />

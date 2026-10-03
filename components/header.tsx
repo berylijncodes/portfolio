@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { links } from "@/lib/data";
 import clsx from "clsx";
 import { useActiveSectionContext } from "@/context/active-section-context";
+import { BsList, BsX } from "react-icons/bs";
 
 const navLabels: Partial<Record<(typeof links)[number]["name"], string>> = {
   About: "./about",
@@ -17,6 +18,7 @@ const navLabels: Partial<Record<(typeof links)[number]["name"], string>> = {
 export default function Header() {
   const { activeSection, setActiveSection, setTimeOfLastClick } =
     useActiveSectionContext();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const navLinks = links.filter((link) => link.name !== "Home");
   const contactLink = links.find((link) => link.name === "Contact")!;
@@ -24,6 +26,7 @@ export default function Header() {
   const goTo = (name: (typeof links)[number]["name"]) => {
     setActiveSection(name);
     setTimeOfLastClick(Date.now());
+    setMobileNavOpen(false);
   };
 
   return (
@@ -32,7 +35,7 @@ export default function Header() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
     >
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:flex-nowrap sm:px-6">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <Link
           href="#home"
           onClick={() => goTo("Home")}
@@ -41,13 +44,10 @@ export default function Header() {
           beryl<span className="text-accent">.dev</span>
         </Link>
 
-        <nav
-          aria-label="Section"
-          className="order-3 w-full sm:order-none sm:w-auto"
-        >
-          <ul className="flex flex-wrap items-center justify-center gap-2 text-sm sm:justify-start">
+        <nav aria-label="Section" className="hidden sm:block">
+          <ul className="flex flex-wrap items-center gap-2 text-sm">
             {navLinks.map((link) => (
-              <motion.li key={link.hash}>
+              <li key={link.hash}>
                 <Link
                   href={link.hash}
                   onClick={() => goTo(link.name)}
@@ -60,19 +60,63 @@ export default function Header() {
                 >
                   {navLabels[link.name] ?? link.name}
                 </Link>
-              </motion.li>
+              </li>
             ))}
           </ul>
         </nav>
 
-        <Link
-          href={contactLink.hash}
-          onClick={() => goTo(contactLink.name)}
-          className="shrink-0 rounded border border-accent px-3 py-1.5 text-sm text-accent transition hover:bg-accent hover:text-canvas"
-        >
-          $ connect
-        </Link>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link
+            href={contactLink.hash}
+            onClick={() => goTo(contactLink.name)}
+            className="rounded border border-accent px-3 py-1.5 text-sm text-accent transition hover:bg-accent hover:text-canvas"
+          >
+            $ connect
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setMobileNavOpen((prev) => !prev)}
+            aria-expanded={mobileNavOpen}
+            aria-controls="mobile-nav"
+            aria-label={mobileNavOpen ? "Close menu" : "Open menu"}
+            className="flex h-9 w-9 items-center justify-center rounded border border-line text-fg sm:hidden"
+          >
+            {mobileNavOpen ? (
+              <BsX className="text-xl" aria-hidden="true" />
+            ) : (
+              <BsList className="text-lg" aria-hidden="true" />
+            )}
+          </button>
+        </div>
       </div>
+
+      {mobileNavOpen && (
+        <nav
+          id="mobile-nav"
+          aria-label="Section"
+          className="border-t border-line px-4 py-3 sm:hidden"
+        >
+          <ul className="flex flex-col gap-2 text-sm">
+            {navLinks.map((link) => (
+              <li key={link.hash}>
+                <Link
+                  href={link.hash}
+                  onClick={() => goTo(link.name)}
+                  className={clsx(
+                    "block rounded border px-3 py-2 transition",
+                    activeSection === link.name
+                      ? "border-accent text-accent"
+                      : "border-line text-muted hover:text-fg hover:border-fg/40",
+                  )}
+                >
+                  {navLabels[link.name] ?? link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
     </motion.header>
   );
 }
