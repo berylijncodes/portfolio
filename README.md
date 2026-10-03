@@ -1,34 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Beryl Ilenwabor — Portfolio
 
-## Getting Started
+Personal portfolio site, built as a single-page app with a terminal-inspired
+dark theme.
 
-First, run the development server:
+**Stack:** Next.js 13 (App Router) · TypeScript · Tailwind CSS · Framer Motion
+· JetBrains Mono · [Resend](https://resend.com) for the contact form
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The contact form sends mail through Resend. Create a `.env.local` file
+(gitignored) with:
 
-## Learn More
+```
+RESEND_API_KEY=your_resend_api_key
+```
 
-To learn more about Next.js, take a look at the following resources:
+Without this set, the form will show an error on submit — everything else on
+the site works without it. The same variable needs to be set in the Vercel
+project's environment variables for the contact form to work in production.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the local dev server |
+| `npm run build` | Production build |
+| `npm run start` | Run the production build locally |
+| `npm run lint` | Lint the project |
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/` — root layout and the single page
+- `components/` — one component per page section, plus shared pieces like
+  `section-heading.tsx` and `section-label.tsx`
+- `lib/data.ts` — all site content (nav links, experience, projects, skills)
+- `actions/send-email.ts` — the contact form's server action
+- `context/` — active-section tracking for the nav highlight
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Deployment
+
+Deployed on [Vercel](https://vercel.com). Pushing to `main` triggers a
+production deploy; every pull request gets its own preview deployment.

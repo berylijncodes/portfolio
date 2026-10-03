@@ -12,9 +12,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'Beryl | Portfolio',
+  title: 'Beryl Ilenwabor | Frontend Engineer',
   description:
-    'Full-stack Web Developer with expertise in Ruby, Rails, React, JavaScript and TypeScript. Passionate about blending creativity and technology to deliver exceptional web experiences.',
+    'Frontend engineer building AI agents. React and TypeScript at TravPro Mobile, with a background in immunology and microbiology.',
 };
 
 export default function RootLayout({
