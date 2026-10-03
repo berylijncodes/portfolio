@@ -29,6 +29,15 @@ export default function Header() {
     setMobileNavOpen(false);
   };
 
+  // "$ connect" does more than the plain "./contact" pill: once the
+  // smooth-scroll lands on the section, it focuses the email field.
+  const goToContactAndFocus = () => {
+    goTo(contactLink.name);
+    window.setTimeout(() => {
+      document.getElementById("senderEmail")?.focus();
+    }, 600);
+  };
+
   return (
     <motion.header
       className="fixed top-0 inset-x-0 z-[999] border-b border-line bg-canvas/90 backdrop-blur-[0.5rem]"
@@ -68,7 +77,7 @@ export default function Header() {
         <div className="flex shrink-0 items-center gap-2">
           <Link
             href={contactLink.hash}
-            onClick={() => goTo(contactLink.name)}
+            onClick={goToContactAndFocus}
             className="rounded border border-accent px-3 py-1.5 text-sm text-accent transition hover:bg-accent hover:text-canvas"
           >
             $ connect
