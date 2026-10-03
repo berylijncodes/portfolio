@@ -4,6 +4,7 @@ import { JetBrains_Mono } from 'next/font/google';
 import ActiveSectionContext from '@/context/active-section-context';
 import { Toaster } from 'react-hot-toast';
 import Footer from '@/components/footer';
+import AskBerylWidget from '@/components/ask-beryl-widget';
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -43,6 +44,7 @@ export default function RootLayout({
               },
             }}
           />
+          <AskBerylWidget />
         </ActiveSectionContext>
       </body>
     </html>
