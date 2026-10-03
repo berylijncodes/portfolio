@@ -24,6 +24,7 @@ export default function Intro() {
       className="mb-28 max-w-3xl text-left sm:mb-0 scroll-mt-[100rem]"
     >
       <motion.div
+        className="mt-6"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
       >
